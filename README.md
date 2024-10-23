@@ -1,6 +1,7 @@
 # dotfiles
 My personal dotfiles for mainly arch linux right now.
 
+test
 
 ---
 See also additional ressources about managing your dotfiles:
