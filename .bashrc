@@ -3,14 +3,89 @@
 #
 
 # If not running interactively, don't do anything
-#[[ $- != *i* ]] && return
+[[ $- != *i* ]] && return
+
+
+####################### Terminal prompt configuration ##########################
+
+# PS1='$ '
+
+
+# Terminology:
+#
+#    \u: the username of the current user.
+#    \h: the hostname up to the first ..
+#    \w: The full path of the current working directory. 
+#    \W: the basename of the current working directory.
+#    \$: displays # if the user is root, otherwise it shows $.
+#    \A: Displays the current time in 24-hour format (HH:MM).
+
+# Shows the user and the working directory
+# PS1='[\u@\h \W \A] $ '
+
+# The same in green
+# PS1='\[\e[32m\][\u@\h \W \A]\$\[\e[0m\] '
+
+
+##### Include the git branch when working on a git repository #####
+
+# Function to get the current Git branch (with the right spacing)
+git_branch() {
+        local branch_name=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        
+        if [[ $? -eq 0 ]]; then
+                if [[ -n "$branch_name" ]]; then
+                        echo -e " $branch_name"
+                else
+                        echo -e ""
+                fi
+        fi
+}
+
+# Set PS1 with Git branch information (in green)
+# PS1='[\u@\h \W \A \[\e[32m\]$(git_branch)\[\e[0m\]] \$ '
+
+# Some coloring already, for the complete coloring see the functions below
+
+# Same command in simple:
+# PS1='\u@\h > \w > \A >$(yellow git_branch) \$ '
 
 
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-#PS1='$ '
+# Set PS1 based on the exit status of the last command (failure or valid)
+set_prompt() {
+        if [[ $? -ne 0 ]]; then
+                # Red coloring for failure (bold with 1;31 // 0;31 is normal)
+                PS1='\033[32m\u@\h\033[0m > \033[33m\w\033[0m > \A > $(red git_branch)\n\033[0;31m\$\033[0m '
+        else
+                # Green coloring for success
+                PS1='\033[32m\u@\h\033[0m > \033[33m\w\033[0m > \A > $(blue git_branch)\n\033[32m\$\033[0m '
 
+        fi
+}
+
+
+# Version 2
+set_prompt2() {
+        if [[ $? -ne 0 ]]; then
+                # Red coloring for failure (bold with 1;31 // 0;31 is normal)
+                PS1='\033[32m\u@\h\033[0m > \033[33m\w\033[0m > \A >$(red git_branch) \033[0;31m\$\033[0m '
+        else
+                # Green coloring for success
+                PS1='\033[32m\u@\h\033[0m > \033[33m\W\033[0m > \A >$(blue git_branch) \033[32m\$\033[0m '
+
+        fi
+}
+
+
+
+# For coloring, tput can be used too:
+# PS1='\[$(tput setaf 4)\]\w > \$ '
+
+
+PROMPT_COMMAND=set_prompt2
+
+#################### Terminal prompt configuration end #########################
 
 
 
@@ -44,14 +119,15 @@ batman() {
         fi
 }
 
-# Colorizing figlet
+
+# Colorizing figlet [Optional]
 function figlet_color() {
     local color_code=$1
     shift
     echo -e "${color_code}$(figlet "$@")\033[0m"
 }
 
-# Colorizing terminal output
+# Colorizing terminal output in a simple matter
 function red() { echo -e "\033[31m$("$@")\033[0m"; }
 
 function yellow() { echo -e "\033[33m$("$@")\033[0m"; }
@@ -90,7 +166,7 @@ zoxide_za_list() {
 ############### Shortcuts ##################
 
 # List directories
-# alias ls='ls'
+alias ls='ls -h --color=auto'
 alias lsd='ls -lah | grep "^d"'
 alias ll='ls -lah'
 alias cat='batman'

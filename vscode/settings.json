@@ -1,0 +1,20 @@
+{
+    "workbench.preferredHighContrastLightColorTheme": "Default Dark+",
+    "workbench.preferredLightColorTheme": "Default Dark+",
+    "workbench.colorTheme": "Default Dark+",
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "none",
+    "editor.fontSize": 20,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "terminal.external.linuxExec": "kitty",
+    "terminal.integrated.fontSize": 20,
+    "redhat.telemetry.enabled": false,
+    "git.autofetch": true,
+    "json.schemas": [
+
+    ]
+}
