@@ -77,6 +77,11 @@ set_prompt2() {
         fi
 }
 
+# Version 3 
+set_prompt3() {
+        # Green coloring for success
+        PS1='\033[32m\u@\h\033[0m > \033[33m\W\033[0m > \A >$(blue git_branch) \033[32m\$\033[0m '
+}
 
 
 # For coloring, tput can be used too:
@@ -151,24 +156,42 @@ eval "$(thefuck --alias)"
 eval "$(zoxide init bash)"
 
 
+# Prettier ls
+zoxide_zl_pls() {
+        z "$@" && pls
+}
+
+zoxide_zi_pls() {
+        zi "$@" && pls
+}
+
+zoxide_za_pls() {
+        z "$@" && pls -d=std
+}
+
+
+# Use this if you don't use pls
 zoxide_zl_list() {
-	z "$@" && ls
+	z "$@" && ls -h --color=auto
 }
 
 zoxide_zi_list() {
-	zi "$@" && ls
+	zi "$@" && ls -h --color=auto
 }
 
 zoxide_za_list() {
-	z "$@" && ls -lah
+	z "$@" && ls -lah --color=auto
 }
 
 ############### Shortcuts ##################
 
 # List directories
-alias ls='ls -h --color=auto'
-alias lsd='ls -lah | grep "^d"'
-alias ll='ls -lah'
+# alias ls='ls -h --color=auto'
+alias ls='pls $@'
+# alias lsd='ls -lah | grep "^d"'
+alias lsd='pls --no-files'
+# alias ll='ls -lah'
+alias ll='pls -a -d=std'
 alias cat='batman'
 
 
@@ -198,24 +221,28 @@ alias mute='wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle' # Mute
 ### Go to helper ###
 
 # Go to and list
-alias cd='zoxide_zl_list'
-alias zl='zoxide_zl_list'
-alias zi='zoxide_zi_list'
+alias cd='zoxide_zl_pls'
+alias zl='zoxide_zl_pls'
+alias zi='zoxide_zi_pls'
 # alias z='zoxide_zl_list' # Use zl instead!!
 
 # Go and list all
-alias zla='zoxide_za_list'
+alias zla='zoxide_za_pls'
 
 
 # Just easier stuff
 alias ff='fastfetch --logo-color-1 red'
 alias hs='hugo server $@'
+alias fe='bash ~/.feh'
+
+# Easier sourcing
 alias brc='. ~/.bashrc'
+alias xrc='. ~/.xinitrc'
 
 
 # Just for fun
 alias dt='date | figlet -ctf Graceful | lolcat'
-alias fire!='aafire -driver curses | lolcat'
+alias fire='aafire -driver curses | lolcat'
 
 
 
