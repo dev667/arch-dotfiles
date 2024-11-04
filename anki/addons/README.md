@@ -19,6 +19,6 @@
 - Anki-redesign `1467361433`
 
 ### Gamifying the learning:
-Ankimon
-Pokemanki Gold
+- Ankimon `1908235722`
+- Pokemanki Gold `1677779223`
 
