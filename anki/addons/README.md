@@ -21,4 +21,6 @@
 ### Gamifying the learning:
 - Ankimon `1908235722`
 - Pokemanki Gold `1677779223`
-
+- Duolingo-style gamification `255048658`
+- Anki Killstreaks `579111794`
+- Anki Habitica `1758045507`
