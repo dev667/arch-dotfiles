@@ -1,5 +1,14 @@
 # dotfiles
-My personal dotfiles for mainly arch linux right now.
+My personal dotfiles for arch linux.
+
+Programs that are neat and platform independent (they follow the linux philosphy in my opinion):
+
+Rofi
+Dmenu
+Polybar
+Sxhkd (Keyboard remapping)
+Brillo (Brightness control)
+Picom
 
 
 
