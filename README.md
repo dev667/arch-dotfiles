@@ -1,4 +1,4 @@
-# dotfiles
+# Arch dotfiles
 My personal dotfiles for arch linux.
 
 Programs that are neat and platform independent (they follow the linux philosphy in my opinion):
