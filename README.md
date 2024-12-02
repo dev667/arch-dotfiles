@@ -11,6 +11,9 @@ Programs that are neat and platform independent (they follow the linux philosphy
 - Brillo (Brightness control)
 - Picom
 
+Useful
+- xcolor
+
 
 
 ---
